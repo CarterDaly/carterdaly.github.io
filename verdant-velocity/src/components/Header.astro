@@ -2,11 +2,11 @@
 import { siteConfig } from '../config/siteConfig';
 ---
 
-<header class="px-6 py-5">
+<header class="px-6 py-5 sticky top-0 z-40 backdrop-blur bg-surface/70 border-b border-white/5">
   <div
     class="mx-auto flex max-w-6xl flex-col items-start gap-4 md:flex-row md:items-center md:justify-between"
   >
-    <a href="#top" class="flex items-center gap-3 text-primary transition hover:text-white">
+    <a href="/" class="flex items-center gap-3 text-primary transition hover:text-white">
       <div class="rounded-full border border-white/10 px-3 py-1 text-sm font-display tracking-tight">
         {siteConfig.name.toLowerCase()}
       </div>
@@ -16,10 +16,19 @@ import { siteConfig } from '../config/siteConfig';
     </a>
 
     <nav class="flex flex-wrap items-center gap-4 text-sm text-muted">
-      <a href="#about" class="transition hover:text-primary">About</a>
-      <a href="#focus" class="transition hover:text-primary">Focus</a>
-      <a href="#approach" class="transition hover:text-primary">Approach</a>
-      <a href="#contact" class="transition hover:text-primary">Contact</a>
+      <a href="/" class="transition hover:text-primary">Home</a>
+      <a href="/work" class="transition hover:text-primary">Work</a>
+      <a href="/about" class="transition hover:text-primary">About</a>
+      <a href="/blog" class="transition hover:text-primary">Blog</a>
+      <a href="/contact" class="transition hover:text-primary">Contact</a>
+      <button
+        id="theme-toggle"
+        type="button"
+        class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.16em] text-primary transition hover:border-accent-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-primary"
+        aria-label="Toggle theme"
+      >
+        Toggle
+      </button>
     </nav>
   </div>
 </header>

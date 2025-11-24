@@ -2,6 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PlasmaHeader from '../components/PlasmaHeader.jsx';
 import SectionTitle from '../components/SectionTitle.astro';
+import Stats from '../components/Stats.astro';
+import WorkGrid from '../components/WorkGrid.astro';
+import ContactBand from '../components/ContactBand.astro';
+import { workItems } from '../data/work';
 import { siteConfig } from '../config/siteConfig';
 
 const focusAreas = [
@@ -60,6 +64,7 @@ const approach = [
         secondaryHref={siteConfig.links.resume}
         intensity={1}
       />
+      <Stats stats={siteConfig.stats} />
     </div>
   </section>
 
@@ -94,6 +99,26 @@ const approach = [
             </div>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="px-6 pb-16">
+    <div class="mx-auto max-w-6xl space-y-8">
+      <SectionTitle
+        eyebrow="featured work"
+        title="Selected explorations"
+        subtitle="Placeholder case studies—click through to see the narrative structure."
+      />
+      <WorkGrid projects={workItems.slice(0, 3)} />
+      <div class="flex justify-end">
+        <a
+          href="/work"
+          class="inline-flex items-center gap-2 text-sm text-primary transition hover:text-white"
+        >
+          View all work
+          <span aria-hidden="true">↗</span>
+        </a>
       </div>
     </div>
   </section>
@@ -189,36 +214,7 @@ const approach = [
 
   <section id="contact" class="px-6 pb-20">
     <div class="mx-auto max-w-6xl">
-      <div class="reveal flex flex-col gap-6 rounded-3xl border border-white/10 bg-gradient-to-br from-accent-primary/10 via-transparent to-accent-secondary/10 p-8 shadow-[0_24px_80px_rgba(0,0,0,0.35)] backdrop-blur">
-        <div class="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em] text-muted">
-          <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-primary/90">
-            <span class="h-2 w-2 rounded-full bg-accent-primary shadow-glow" />
-            contact
-          </span>
-          <span class="text-muted/80">Let’s collaborate on high-signal ML.</span>
-        </div>
-        <div class="flex flex-wrap items-center gap-4">
-          <a
-            href={siteConfig.links.email}
-            class="inline-flex items-center gap-2 rounded-full bg-accent-primary px-5 py-3 text-base font-semibold text-surface transition hover:-translate-y-[1px] hover:shadow-glow focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-primary"
-          >
-            {siteConfig.contactCtaLabel}
-            <span aria-hidden="true">↗</span>
-          </a>
-          <a
-            href={siteConfig.links.linkedin}
-            class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-3 text-base font-semibold text-primary transition hover:-translate-y-[1px] hover:border-accent-primary/60 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-primary"
-          >
-            LinkedIn
-          </a>
-          <a
-            href={siteConfig.links.github}
-            class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-3 text-base font-semibold text-primary transition hover:-translate-y-[1px] hover:border-accent-primary/60 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-primary"
-          >
-            GitHub
-          </a>
-        </div>
-      </div>
+      <ContactBand />
     </div>
   </section>
 

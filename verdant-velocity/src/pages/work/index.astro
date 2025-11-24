@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import WorkGrid from '../../components/WorkGrid.astro';
+import { workItems } from '../../data/work';
+import { siteConfig } from '../../config/siteConfig';
+---
+
+<BaseLayout title={`Work — ${siteConfig.name}`} description="Featured work and case studies.">
+  <section class="px-6 pb-6 pt-10 sm:pt-12">
+    <div class="mx-auto max-w-6xl space-y-6">
+      <SectionTitle
+        eyebrow="work"
+        title="Featured case studies"
+        subtitle="Placeholder projects outlining the structure for full narratives."
+      />
+      <p class="text-muted max-w-3xl text-base">
+        Each case study will cover overview, role, tools, problem, process, challenges, outcomes, and impact. Content is placeholder for now.
+      </p>
+    </div>
+  </section>
+  <section class="px-6 pb-16">
+    <div class="mx-auto max-w-6xl">
+      <WorkGrid projects={workItems} />
+    </div>
+  </section>
+</BaseLayout>

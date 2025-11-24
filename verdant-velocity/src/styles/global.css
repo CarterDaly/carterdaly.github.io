@@ -4,11 +4,29 @@
 
 :root {
   color-scheme: dark;
+  --surface: #020617;
+  --elevated: #0b1224;
+  --text-primary: #e5e7eb;
+  --text-muted: #9ca3af;
+  --accent-primary: #22d3ee;
+  --accent-secondary: #a855f7;
+  --accent-warm: #f59e0b;
+}
+
+:root.theme-light {
+  color-scheme: light;
+  --surface: #0c1424;
+  --elevated: #111b2d;
+  --text-primary: #f4f6fb;
+  --text-muted: #cbd5e1;
+  --accent-primary: #22d3ee;
+  --accent-secondary: #c084fc;
+  --accent-warm: #fbbf24;
 }
 
 @layer base {
   html {
-    background-color: #020617;
+    background-color: var(--surface);
   }
 
   body {

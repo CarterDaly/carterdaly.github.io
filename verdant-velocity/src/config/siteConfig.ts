@@ -10,7 +10,7 @@ export const siteConfig = {
   metaTitle: 'Carter Daly — data & ml',
   metaDescription:
     'Nuclear fusion, race strategy, and time-series systems — with a bias toward interpretable, high-impact ML.',
-  location: 'Update location in siteConfig',
+  location: 'Location TBD',
   links: {
     github: 'https://github.com/carterdaly',
     linkedin: 'https://www.linkedin.com/in/carterwdaly',
@@ -19,11 +19,17 @@ export const siteConfig = {
   },
   contactCtaLabel: 'Email me',
   secondaryCtaLabel: 'Download CV',
+  stats: {
+    years: '—',
+    projects: '—',
+    clients: '—',
+  },
   assets: {
     ogDefault: '/og-default.png',
     faviconSvg: '/favicon.svg',
     faviconIco: null,
   },
+  site: 'https://carterdaly.github.io',
 } as const;
 
 export type SiteConfig = typeof siteConfig;

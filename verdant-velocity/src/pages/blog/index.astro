@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import ContactBand from '../../components/ContactBand.astro';
+import { siteConfig } from '../../config/siteConfig';
+---
+
+<BaseLayout title={`Blog — ${siteConfig.name}`} description="Writing and notes coming soon.">
+  <section class="px-6 pb-16 pt-10 sm:pt-12">
+    <div class="mx-auto max-w-5xl space-y-6">
+      <SectionTitle
+        eyebrow="blog"
+        title="Writing coming soon"
+        subtitle="This space will host research notes and case study write-ups."
+      />
+      <div class="rounded-2xl border border-white/10 bg-white/5 p-6 text-muted shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
+        No posts yet. Once ready, add MD/MDX entries to `src/content/writing`.
+      </div>
+    </div>
+  </section>
+  <section class="px-6 pb-20">
+    <div class="mx-auto max-w-5xl">
+      <ContactBand />
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import ContactBand from '../components/ContactBand.astro';
+import { siteConfig } from '../config/siteConfig';
+---
+
+<BaseLayout title={`About — ${siteConfig.name}`} description="About Carter Daly — background, skills, and focus.">
+  <section class="px-6 pb-16 pt-10 sm:pt-12">
+    <div class="mx-auto max-w-6xl space-y-8">
+      <SectionTitle
+        eyebrow="about"
+        title="Carter Daly — research-oriented ML practitioner"
+        subtitle="Fusion, race strategy, and resilient forecasting — with interpretability baked in."
+      />
+      <div class="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
+        <div class="space-y-5 rounded-2xl border border-white/10 bg-gradient-to-r from-white/5 via-transparent to-white/5 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
+          <p class="text-lg text-primary/90">
+            I work where signals are messy and stakes are high: stabilizing fusion plasmas, plotting race strategies,
+            and forecasting uncertain systems. My bias: clarity over cleverness, physics and priors over unchecked complexity.
+          </p>
+          <p class="text-muted">
+            This page will expand with real experience, coursework, and collaborations. The résumé link is a placeholder until updated.
+          </p>
+          <div class="flex flex-wrap items-center gap-3">
+            <a
+              href={siteConfig.links.resume}
+              class="inline-flex items-center gap-2 rounded-full bg-accent-primary px-4 py-2 text-sm font-semibold text-surface transition hover:-translate-y-[1px] hover:shadow-glow focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-primary"
+            >
+              Download résumé
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a
+              href={siteConfig.links.email}
+              class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-primary transition hover:-translate-y-[1px] hover:border-accent-primary/60 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-primary"
+            >
+              Email
+            </a>
+          </div>
+        </div>
+        <div class="space-y-4 rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
+          <p class="text-sm uppercase tracking-[0.2em] text-muted">focus threads</p>
+          <ul class="space-y-3 text-sm text-primary/90">
+            <li class="flex items-start gap-2">
+              <span class="mt-1 h-1.5 w-1.5 rounded-full bg-accent-primary" />
+              Fusion disruption early-warning with interpretable TS models.
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-1 h-1.5 w-1.5 rounded-full bg-accent-secondary" />
+              Bayesian race strategy simulations leveraging FastF1 data.
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-1 h-1.5 w-1.5 rounded-full bg-accent-warm" />
+              Uncertainty-aware forecasting pipelines resilient to drift.
+            </li>
+          </ul>
+          <div class="rounded-xl border border-white/10 bg-gradient-to-br from-accent-primary/10 via-transparent to-accent-secondary/10 p-4 text-muted">
+            No headshot yet; an abstract avatar or portrait placeholder can live here later.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 pb-20">
+    <div class="mx-auto max-w-6xl">
+      <ContactBand />
+    </div>
+  </section>
+</BaseLayout>

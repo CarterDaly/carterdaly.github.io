@@ -5,14 +5,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        surface: '#020617',
-        elevated: '#0B1224',
-        primary: '#E5E7EB',
-        muted: '#9CA3AF',
+        surface: 'var(--surface)',
+        elevated: 'var(--elevated)',
+        primary: 'var(--text-primary)',
+        muted: 'var(--text-muted)',
         accent: {
-          primary: '#22D3EE',
-          secondary: '#A855F7',
-          warm: '#F59E0B',
+          primary: 'var(--accent-primary)',
+          secondary: 'var(--accent-secondary)',
+          warm: 'var(--accent-warm)',
         },
       },
       fontFamily: {

@@ -16,7 +16,7 @@ const pageDescription =
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -42,6 +42,17 @@ const pageDescription =
       rel="stylesheet"
       href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500,600&f[]=jetbrains-mono@400,500&display=swap"
     />
+    <script>
+      const storedTheme = typeof localStorage !== 'undefined' ? localStorage.getItem('theme') : null;
+      const prefersDark =
+        typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = storedTheme || (prefersDark ? 'dark' : 'dark');
+      if (theme === 'light') {
+        document.documentElement.classList.add('theme-light');
+      } else {
+        document.documentElement.classList.remove('theme-light');
+      }
+    </script>
   </head>
   <body class="bg-surface text-primary font-body min-h-screen antialiased">
     <a
@@ -57,5 +68,23 @@ const pageDescription =
       </main>
       <Footer />
     </div>
+    <script>
+      const toggle = document.getElementById('theme-toggle');
+      const root = document.documentElement;
+      const applyTheme = (mode) => {
+        if (mode === 'light') {
+          root.classList.add('theme-light');
+        } else {
+          root.classList.remove('theme-light');
+        }
+        localStorage.setItem('theme', mode);
+      };
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          const isLight = root.classList.contains('theme-light');
+          applyTheme(isLight ? 'dark' : 'light');
+        });
+      }
+    </script>
   </body>
 </html>

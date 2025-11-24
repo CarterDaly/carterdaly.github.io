@@ -1,0 +1,12 @@
+---
+import WorkCard from './WorkCard.astro';
+import { workItems as defaultWork } from '../data/work';
+
+const { projects = defaultWork } = Astro.props;
+---
+
+<div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+  {projects.map((project) => (
+    <WorkCard project={project} />
+  ))}
+</div>
