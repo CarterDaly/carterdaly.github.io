@@ -1,0 +1,25 @@
+---
+import { siteConfig } from '../config/siteConfig';
+---
+
+<header class="px-6 py-5">
+  <div
+    class="mx-auto flex max-w-6xl flex-col items-start gap-4 md:flex-row md:items-center md:justify-between"
+  >
+    <a href="#top" class="flex items-center gap-3 text-primary transition hover:text-white">
+      <div class="rounded-full border border-white/10 px-3 py-1 text-sm font-display tracking-tight">
+        {siteConfig.name.toLowerCase()}
+      </div>
+      <span class="text-xs uppercase tracking-[0.12em] text-muted">
+        {siteConfig.label}
+      </span>
+    </a>
+
+    <nav class="flex flex-wrap items-center gap-4 text-sm text-muted">
+      <a href="#about" class="transition hover:text-primary">About</a>
+      <a href="#focus" class="transition hover:text-primary">Focus</a>
+      <a href="#approach" class="transition hover:text-primary">Approach</a>
+      <a href="#contact" class="transition hover:text-primary">Contact</a>
+    </nav>
+  </div>
+</header>
