@@ -1,0 +1,24 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="border-t border-[rgba(216,207,196,0.18)] bg-[var(--color-bg)]">
+  <div class="max-grid section-padding py-10 md:py-12 flex flex-col gap-6">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+      <div>
+        <p class="text-sm uppercase tracking-[0.22em] text-[var(--accent-tertiary)]">Carter Daly</p>
+        <p class="text-base text-[var(--color-muted)]">ML / Data science — fusion, race strategy, forecasting</p>
+      </div>
+      <div class="flex gap-5 text-sm">
+        <a class="underline-link hover:text-[var(--accent-tertiary)]" href="mailto:hello@carterdaly.com">Email</a>
+        <a class="underline-link hover:text-[var(--accent-tertiary)]" href="https://github.com/carterdaly" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="underline-link hover:text-[var(--accent-tertiary)]" href="https://www.linkedin.com/in/carterdaly/" target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+    </div>
+    <div class="flex items-center gap-3 text-xs text-[var(--color-muted)]">
+      <span>© {currentYear} Carter Daly</span>
+      <span class="inline-block w-8 h-px bg-[rgba(255,255,255,0.15)]"></span>
+      <span>designed & built with intent</span>
+    </div>
+  </div>
+</footer>

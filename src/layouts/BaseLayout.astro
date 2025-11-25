@@ -1,0 +1,22 @@
+---
+import "../styles/global.css";
+
+const { title = "Carter Daly — ML Engineer", description = "Swiss-inspired ML portfolio for fusion modeling, F1 strategy, and forecasting." } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+<body class="bg-[var(--color-bg)] text-[var(--color-text)] antialiased">
+  <div class="noise-overlay"></div>
+  <div class="grid-overlay"></div>
+  <div class="rhythm-lines"></div>
+  <slot />
+</body>
+</html>

@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { Hero } from "../components/sections/Hero";
+import { FocusSection } from "../components/sections/Focus";
+import { ApproachSection } from "../components/sections/Approach";
+import { AboutSection } from "../components/sections/About";
+import { ContactSection } from "../components/sections/Contact";
+---
+
+<BaseLayout>
+  <Header />
+  <main>
+    <Hero client:load />
+    <FocusSection client:visible />
+    <ApproachSection client:visible />
+    <AboutSection client:visible />
+    <ContactSection client:visible />
+  </main>
+  <Footer />
+</BaseLayout>
