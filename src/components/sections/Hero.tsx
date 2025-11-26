@@ -22,55 +22,44 @@ export function Hero() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section className="section-padding pt-18 md:pt-22 lg:pt-24 bg-[var(--accent-tertiary)] relative overflow-hidden" id="top">
+    <section className="section-padding pt-20 md:pt-24 lg:pt-28 bg-[var(--accent-tertiary)] relative overflow-hidden min-h-[660px]" id="top">
       <div className="absolute inset-0 pointer-events-none opacity-30" style={{ backgroundImage: "repeating-linear-gradient(0deg, rgba(0,0,0,0.02), rgba(0,0,0,0.02) 1px, transparent 1px, transparent 3px), repeating-linear-gradient(90deg, rgba(0,0,0,0.02), rgba(0,0,0,0.02) 1px, transparent 1px, transparent 4px)" }}></div>
-      <div className="max-grid relative grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+      <div className="absolute inset-0 pointer-events-none opacity-60">
+        <div className="w-full h-full">
+          <HeroGraphic />
+        </div>
+      </div>
+      <div className="max-grid relative z-10 grid lg:grid-cols-12 gap-14 lg:gap-20 items-stretch">
         <motion.div
           variants={staggerParent}
           initial="hidden"
           animate="show"
-          className="lg:col-span-5 space-y-7 max-w-[34rem]"
+          className="lg:col-span-4 relative flex gap-8 lg:gap-10"
         >
+          <div className="absolute left-0 top-0 h-full w-px bg-[rgba(0,0,0,0.14)]" aria-hidden="true" />
           <motion.span
             variants={fadeUp()}
-            className="eyebrow text-[0.7rem] tracking-[0.32em] font-semibold"
-            style={{ color: "#0b0c0d" }}
+            className="eyebrow text-[0.66rem] tracking-[0.26em] font-semibold"
+            style={{ color: "#0b0c0d", writingMode: "vertical-rl", transform: "rotate(180deg)", alignSelf: "flex-start", marginTop: "16px", marginLeft: "-28px" }}
           >
             DATA & ML
           </motion.span>
-          <motion.h1
-            variants={fadeUp()}
-            className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-[#0b0c0d]"
-          >
-            pursuing models
-            <br />
-            that solve
-            <br />
-            impossible problems.
-          </motion.h1>
-          <motion.p variants={fadeUp()} className="text-[16px] text-[#0b0c0d] max-w-[32rem] leading-[1.7]">
+          <div className="space-y-10 max-w-[32rem] pl-5">
+            <motion.h1
+              variants={fadeUp()}
+              className="text-5xl md:text-6xl lg:text-[4.6rem] font-semibold leading-[1.02] tracking-[-0.01em] text-[#0b0c0d]"
+            >
+              pursuing models
+              <br />
+              that solve impossible problems.
+            </motion.h1>
+            <motion.p variants={fadeUp()} className="text-[16px] text-[#0b0c0d] max-w-[32rem] leading-[1.7] tracking-[0.01em]">
             Machine learning and data science for complex systems; pragmatic methods, ambitious abstractions.
           </motion.p>
-          <motion.p variants={fadeUp()} className="text-[15px] text-[#3a3a3a] max-w-[30rem] leading-[1.7]">
-            Currently crafting resilient modeling approaches that balance rigor, clarity, and pace.
-          </motion.p>
-          <motion.div variants={fadeUp()} className="flex flex-wrap gap-4 pt-4">
-            <Button href="mailto:hello@carterdaly.com">Email me</Button>
-            <Button
-              variant="ghost"
-              className="border-[var(--accent-primary)] text-[var(--accent-primary)] hover:text-[var(--color-text)]"
-              href="/cv.pdf"
-            >
-              View résumé
-            </Button>
-          </motion.div>
+          </div>
         </motion.div>
 
-        <div className="lg:col-span-7 flex justify-center items-center px-0">
-          <div className="w-full max-w-[1500px] max-h-[820px] min-h-[620px] aspect-[4/3]">
-            <HeroGraphic />
-          </div>
-        </div>
+        <div className="lg:col-span-8" />
       </div>
     </section>
   );
