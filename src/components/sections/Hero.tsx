@@ -29,7 +29,7 @@ export function Hero() {
           variants={staggerParent}
           initial="hidden"
           animate="show"
-          className="lg:col-span-5 space-y-6"
+          className="lg:col-span-5 space-y-7 max-w-[34rem]"
         >
           <motion.span
             variants={fadeUp()}
@@ -40,7 +40,7 @@ export function Hero() {
           </motion.span>
           <motion.h1
             variants={fadeUp()}
-            className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.08] text-[#0b0c0d]"
+            className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-[#0b0c0d]"
           >
             pursuing models
             <br />
@@ -48,13 +48,13 @@ export function Hero() {
             <br />
             impossible problems.
           </motion.h1>
-          <motion.p variants={fadeUp()} className="text-[16px] text-[#0b0c0d] max-w-xl leading-relaxed">
+          <motion.p variants={fadeUp()} className="text-[16px] text-[#0b0c0d] max-w-[32rem] leading-[1.7]">
             Machine learning and data science for complex systems; pragmatic methods, ambitious abstractions.
           </motion.p>
-          <motion.p variants={fadeUp()} className="text-[15px] text-[#3a3a3a] max-w-md leading-relaxed">
+          <motion.p variants={fadeUp()} className="text-[15px] text-[#3a3a3a] max-w-[30rem] leading-[1.7]">
             Currently crafting resilient modeling approaches that balance rigor, clarity, and pace.
           </motion.p>
-          <motion.div variants={fadeUp()} className="flex flex-wrap gap-3 pt-2">
+          <motion.div variants={fadeUp()} className="flex flex-wrap gap-4 pt-4">
             <Button href="mailto:hello@carterdaly.com">Email me</Button>
             <Button
               variant="ghost"
@@ -67,7 +67,7 @@ export function Hero() {
         </motion.div>
 
         <div className="lg:col-span-7 flex justify-center items-center px-0">
-          <div className="w-full max-w-[1500px] aspect-[4/3]">
+          <div className="w-full max-w-[1500px] max-h-[820px] min-h-[620px] aspect-[4/3]">
             <HeroGraphic />
           </div>
         </div>
