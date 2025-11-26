@@ -26,14 +26,14 @@ const cardVariants = {
   }),
 };
 
-export function FocusSection() {
+export function OutputSection() {
   return (
-    <section id="focus" className="section-padding bg-[#0f0f0f]">
+    <section id="output" className="section-padding bg-[#0f0f0f]">
       <div className="max-grid space-y-8">
         <SectionHeader
-          label="Focus"
-          title="Target domains"
-          description="Areas where rigor, speed, and interpretability converge for outsized impact."
+          label="Output"
+          title="Selected work"
+          description="A selection of projects I’ve enjoyed building: scientific prediction, strategic modeling, and practical analytics solutions."
         />
         <div className="grid md:grid-cols-3 gap-6 border border-[rgba(216,207,196,0.2)] divide-y md:divide-y-0 md:divide-x divide-[rgba(216,207,196,0.14)]">
           {domains.map((domain, idx) => (

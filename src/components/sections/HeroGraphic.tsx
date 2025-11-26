@@ -73,7 +73,7 @@ export function HeroGraphic() {
           FORECASTING
         </motion.text>
         <motion.text
-          x={624}
+          x={626}
           y={716}
           fill="#8a101e"
           fontFamily="Neue Haas Grotesk Display Pro, 'Helvetica Neue', Arial, sans-serif"
