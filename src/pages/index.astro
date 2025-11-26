@@ -4,7 +4,6 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { Hero } from "../components/sections/Hero";
 import { OutputSection } from "../components/sections/Output";
-import { ApproachSection } from "../components/sections/Approach";
 import { AboutSection } from "../components/sections/About";
 import { ContactSection } from "../components/sections/Contact";
 ---
@@ -14,7 +13,6 @@ import { ContactSection } from "../components/sections/Contact";
   <main>
     <Hero client:load />
     <OutputSection client:visible />
-    <ApproachSection client:visible />
     <AboutSection client:visible />
     <ContactSection client:visible />
   </main>
