@@ -45,6 +45,7 @@ export function Hero() {
           <motion.p
             variants={fadeUp(14)}
             className="text-[15px] sm:text-[15.5px] text-[#0b0c0d] w-full max-w-full md:max-w-[30rem] leading-[1.68] tracking-[0.01em] break-words pr-0"
+            style={{ wordBreak: "break-word", overflowWrap: "break-word" }}
           >
             Machine learning and data science for complex systems; pragmatic methods, ambitious abstractions.
           </motion.p>
