@@ -25,7 +25,7 @@ export function Hero() {
     <section className="section-padding pt-24 md:pt-28 lg:pt-32 bg-[var(--accent-tertiary)] relative overflow-hidden min-h-[68vh]" id="top">
       <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.12, backgroundImage: "repeating-linear-gradient(0deg, rgba(0,0,0,0.02), rgba(0,0,0,0.02) 1px, transparent 1px, transparent 3px), repeating-linear-gradient(90deg, rgba(0,0,0,0.02), rgba(0,0,0,0.02) 1px, transparent 1px, transparent 4px)" }}></div>
       <div
-        className="absolute inset-y-0 right-0 w-[82%] sm:w-[78%] lg:w-[74%] xl:w-[72%] pointer-events-none"
+        className="absolute inset-y-0 right-0 w-[82%] sm:w-[78%] lg:w-[74%] xl:w-[72%] pointer-events-none hidden md:block"
         style={{ opacity: 0.6 }}
       >
         <div className="w-full h-full translate-x-4 sm:translate-x-6 lg:translate-x-10 scale-[1.05]">
