@@ -42,7 +42,10 @@ export function Hero() {
             <br />
             that solve impossible problems.
           </motion.h1>
-          <motion.p variants={fadeUp(14)} className="text-[15.5px] text-[#0b0c0d] max-w-[30rem] leading-[1.68] tracking-[0.01em]">
+          <motion.p
+            variants={fadeUp(14)}
+            className="text-[15.5px] text-[#0b0c0d] max-w-full md:max-w-[30rem] leading-[1.68] tracking-[0.01em] pr-1"
+          >
             Machine learning and data science for complex systems; pragmatic methods, ambitious abstractions.
           </motion.p>
         </motion.div>
