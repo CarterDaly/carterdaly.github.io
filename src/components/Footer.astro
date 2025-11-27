@@ -3,17 +3,24 @@ const currentYear = new Date().getFullYear();
 ---
 
 <footer class="border-t border-[rgba(216,207,196,0.18)] bg-[var(--color-bg)]">
-  <div class="max-grid section-padding py-10 md:py-12 flex flex-col gap-6">
-    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-      <div>
-        <p class="text-sm uppercase tracking-[0.22em] text-[var(--accent-tertiary)]">Carter Daly</p>
-        <p class="text-base text-[var(--color-muted)]">ML / Data science — fusion, race strategy, forecasting</p>
+  <div class="max-grid px-8 md:px-10 py-10 md:py-12 flex flex-col gap-6">
+    <div class="grid md:grid-cols-2 gap-4 md:gap-6 items-start">
+      <div class="space-y-2">
+        <p class="text-sm uppercase tracking-[0.22em] text-[var(--accent-tertiary)]">Contact</p>
+        <p class="text-base text-[var(--color-muted)]">For collaborations or roles, reach out.</p>
+      </div>
+      <div class="flex flex-col md:items-end text-sm text-[var(--color-text)] gap-3">
+        <div class="flex flex-wrap items-center gap-2 md:gap-3">
+          <a class="underline-link" href="mailto:daly.carter.w@gmail.com">Email</a>
+          <span class="text-[var(--color-muted)]">/</span>
+          <a class="underline-link" href="https://www.linkedin.com/in/carterwdaly" target="_blank" rel="noreferrer">LinkedIn</a>
+          <span class="text-[var(--color-muted)]">/</span>
+          <a class="underline-link" href="https://github.com/carterdaly" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
       </div>
     </div>
     <div class="flex items-center gap-3 text-xs text-[var(--color-muted)]">
       <span>© {currentYear} Carter Daly</span>
-      <span class="inline-block w-8 h-px bg-[rgba(255,255,255,0.15)]"></span>
-      <span>designed & built with intent</span>
     </div>
   </div>
 </footer>

@@ -35,7 +35,7 @@ export function OutputSection() {
           title="Selected work"
           description="A selection of projects I’ve enjoyed building: scientific prediction, strategic modeling, and practical analytics solutions."
         />
-        <div className="grid md:grid-cols-3 gap-6 border border-[rgba(216,207,196,0.2)] divide-y md:divide-y-0 md:divide-x divide-[rgba(216,207,196,0.14)]">
+        <div className="grid md:grid-cols-3 gap-6 md:gap-0 border border-[rgba(216,207,196,0.2)] divide-y md:divide-y-0 md:divide-x divide-[rgba(216,207,196,0.14)]">
           {domains.map((domain, idx) => (
             <motion.div
               key={domain.title}
