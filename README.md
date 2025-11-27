@@ -1,43 +1,37 @@
-# Astro Starter Kit: Minimal
+# Carter Daly — Swiss-inspired ML Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Live site: https://carterdaly.github.io
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+This is the source for Carter Daly’s personal site — a Swiss modernist, Astro + React + Tailwind build showcasing ML work across fusion modeling, race strategy, and forecasting. The focus is on a disciplined grid, restrained color, and clear hierarchy.
 
-## 🚀 Project Structure
+## Stack
+- Astro with React islands
+- Tailwind CSS (utility-first, minimal custom CSS)
+- Framer Motion for subtle motion
 
-Inside of your Astro project, you'll see the following folders and files:
-
+## Project Structure
 ```text
 /
-├── public/
+├── public/                # Static assets
 ├── src/
-│   └── pages/
-│       └── index.astro
+│   ├── components/        # UI building blocks and sections
+│   ├── layouts/           # Base layout shell
+│   ├── pages/             # Astro pages
+│   └── styles/            # Global styles and tokens
 └── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Commands
+Run from the project root:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+| Command         | Action                                      |
+| :-------------- | :------------------------------------------ |
+| `npm install`   | Install dependencies                        |
+| `npm run dev`   | Start local dev server (default: 4321)      |
+| `npm run build` | Build the production site to `./dist/`      |
+| `npm run preview` | Preview the production build locally      |
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Design Notes
+- Color palette from `src/styles/global.css`: dark base, off-white text, accent green (`--accent-primary`), oxblood red (`--accent-secondary`), warm neutral (`--accent-tertiary`).
+- Typography: Neue Haas Grotesk for headings, Satoshi for body, JetBrains Mono for code details.
+- Layout: max-width grid, generous spacing, minimal chrome.
