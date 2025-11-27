@@ -23,7 +23,7 @@ export function AboutSection() {
               That chase for the complex doesn’t stop outside of work. I revere <strong>music</strong>, both listening to and producing it. <strong>Skiing</strong> at the first hint of snowfall, dialing in the perfect shot of espresso, and the late nights and early mornings spent watching <strong>Formula 1</strong> all scratch the same part of my brain... and being a Ferrari fan teaches a different kind of patience.
             </p>
             <p className="text-[var(--color-text)] opacity-90 leading-[1.72] text-base md:text-lg">
-              What I want, ultimately, is to work on things that push the frontier forward <strong>without forgetting the cost of moving too fast</strong>. Nuclear fusion, caution regarding <strong>AGI</strong> advances, useful systems that <strong>reduce harm</strong>. I care about elegance, but I care more about whether something actually helps. If I can understand a problem well enough to build something meaningful around it, that, to me, is life pointed towards the right horizon.
+              What I want, ultimately, is to work on things that push the frontier forward <strong>without forgetting the cost of moving too fast</strong>. Nuclear fusion, meticulous <strong>AGI</strong> advances, useful systems that <strong>reduce harm</strong>. I care about elegance, but I care more about whether something actually helps. If I can understand a problem well enough to build something meaningful around it, that, to me, is life pointed towards the right horizon.
             </p>
           </motion.div>
         </div>

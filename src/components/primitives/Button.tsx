@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 
-type Variant = "primary" | "secondary" | "ghost";
+type Variant = "primary" | "secondary" | "ghost" | "primaryRed";
 
 type Props = React.ComponentProps<"a"> & {
   variant?: Variant;
@@ -13,6 +13,8 @@ const base =
 const variants: Record<Variant, string> = {
   primary:
     "bg-[var(--accent-primary)] text-[var(--color-text)] border-[var(--accent-primary)] hover:bg-transparent hover:text-[var(--accent-primary)]",
+  primaryRed:
+    "bg-[rgba(138,16,30,0.84)] text-[var(--color-text)] border-[rgba(138,16,30,0.84)] hover:bg-transparent hover:text-[rgba(138,16,30,0.84)]",
   secondary:
     "text-[var(--accent-tertiary)] border-[rgba(216,207,196,0.35)] hover:border-[var(--accent-tertiary)] hover:text-[var(--color-text)]",
   ghost:
