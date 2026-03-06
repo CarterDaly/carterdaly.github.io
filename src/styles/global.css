@@ -204,6 +204,37 @@
     border-radius: 0;
   }
 
+  .grain-panel {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .grain-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background-image: url("/textures/grain.svg");
+    background-size: 128px 128px;
+    background-repeat: repeat;
+    opacity: var(--grain-opacity, 0.44);
+    mix-blend-mode: var(--grain-blend, soft-light);
+    filter: var(--grain-filter, contrast(0.9) brightness(0.97));
+  }
+
+  .grain-panel > :not(.absolute):not(.fixed):not(.sticky) {
+    position: relative;
+    z-index: 2;
+  }
+
+  .grain-panel-hero {
+    --grain-opacity: 0.28;
+    --grain-blend: multiply;
+    --grain-filter: contrast(.4) brightness(2);
+  }
+
   .paper-panel {
     background: #f4f1ea;
     color: #121212;

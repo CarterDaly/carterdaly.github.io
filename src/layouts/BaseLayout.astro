@@ -1,7 +1,8 @@
 ---
 import "../styles/global.css";
 
-const { title = "Carter Daly — ML Engineer", description = "Swiss-inspired ML portfolio for fusion modeling, F1 strategy, and forecasting." } = Astro.props;
+const { title = "Carter Daly — Full Stack Data Scientist", description = "Swiss-inspired ML portfolio for fusion modeling, F1 strategy, and forecasting." } = Astro.props;
+const faviconVersion = "20260305b";
 ---
 
 <!DOCTYPE html>
@@ -11,7 +12,8 @@ const { title = "Carter Daly — ML Engineer", description = "Swiss-inspired ML 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" sizes="any" href={`/favicon.svg?v=${faviconVersion}`} />
+    <link rel="shortcut icon" href={`/favicon.svg?v=${faviconVersion}`} />
   </head>
 <body class="bg-[var(--color-bg)] text-[var(--color-text)] antialiased">
   <div class="noise-overlay"></div>
