@@ -1,7 +1,9 @@
 ---
 import "../styles/global.css";
+import DissolveLayer from "../components/DissolveLayer";
 
-const { title = "Carter Daly — ML Engineer", description = "Swiss-inspired ML portfolio for fusion modeling, F1 strategy, and forecasting." } = Astro.props;
+const { title = "Carter Daly — Full Stack Data Scientist", description = "Swiss-inspired ML portfolio for fusion modeling, F1 strategy, and forecasting." } = Astro.props;
+const faviconVersion = "20260305b";
 ---
 
 <!DOCTYPE html>
@@ -11,12 +13,56 @@ const { title = "Carter Daly — ML Engineer", description = "Swiss-inspired ML 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" sizes="any" href={`/favicon.svg?v=${faviconVersion}`} />
+    <link rel="shortcut icon" href={`/favicon.svg?v=${faviconVersion}`} />
   </head>
 <body class="bg-[var(--color-bg)] text-[var(--color-text)] antialiased">
   <div class="noise-overlay"></div>
   <div class="grid-overlay"></div>
   <div class="rhythm-lines"></div>
+
+  <!-- Dissolve effect — a single localized displacement filter (#dissolve-remix)
+       applied to .dissolve-host. The lens itself is the dissolve: real
+       SourceGraphic pixels are scrambled in place inside the cursor radius
+       and snap back as the cursor moves on.
+
+       Chain:
+         1. feImage (#remix-cursor-img) lays down a soft radial cursor disc at
+            the current pointer position. JS moves it each frame.
+         2. A fine turbulence pass warps that disc, giving its outer boundary
+            an irregular, organic shape rather than a clean circle.
+         3. A coarser turbulence pass generates the actual displacement field.
+         4. Composite "in" multiplies the displacement field by the warped disc
+            so the effect is localized — zero displacement outside the disc.
+         5. feDisplacementMap scrambles the SourceGraphic pixels by the
+            localized field. -->
+  <svg width="0" height="0" class="dissolve-defs" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="dissolve-remix" filterUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+        <feImage id="remix-cursor-img"
+                 href="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27160%27%20height%3D%27160%27%3E%3Cdefs%3E%3CradialGradient%20id%3D%27g%27%20cx%3D%2750%25%27%20cy%3D%2750%25%27%20r%3D%2750%25%27%3E%3Cstop%20offset%3D%270%25%27%20stop-color%3D%27white%27%20stop-opacity%3D%271%27%2F%3E%3Cstop%20offset%3D%2755%25%27%20stop-color%3D%27white%27%20stop-opacity%3D%270.92%27%2F%3E%3Cstop%20offset%3D%27100%25%27%20stop-color%3D%27white%27%20stop-opacity%3D%270%27%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2780%27%20cy%3D%2780%27%20r%3D%2780%27%20fill%3D%27url%28%23g%29%27%2F%3E%3C%2Fsvg%3E"
+                 x="-9999" y="-9999" width="60" height="60"
+                 preserveAspectRatio="xMidYMid meet"
+                 result="cursorImg"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="2" seed="4" stitchTiles="noStitch" result="edgeWarpNoise"/>
+        <feDisplacementMap in="cursorImg" in2="edgeWarpNoise" scale="200" xChannelSelector="R" yChannelSelector="G" result="warpedCursor"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.058" numOctaves="2" seed="3" stitchTiles="noStitch" result="remixNoise"/>
+        <feComposite in="remixNoise" in2="warpedCursor" operator="in" result="localRemix"/>
+        <!-- Background gray (R=G=128) so pixels outside the cursor area read as
+             0.5 in the displacement map — meaning zero displacement. Without
+             this, feComposite's transparent black background reads as R=G=0,
+             which feDisplacementMap interprets as a constant (-scale/2, -scale/2)
+             shift across the entire page, producing a visible gap at the top
+             and left edges of the filtered region. -->
+        <feFlood flood-color="rgb(128,128,128)" flood-opacity="1" result="grayBase"/>
+        <feComposite in="localRemix" in2="grayBase" operator="over" result="finalRemix"/>
+        <feDisplacementMap in="SourceGraphic" in2="finalRemix" scale="35" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
   <slot />
+
+  <DissolveLayer client:load />
 </body>
 </html>

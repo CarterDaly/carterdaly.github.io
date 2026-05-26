@@ -28,7 +28,7 @@ const cardVariants = {
 
 export function OutputSection() {
   return (
-    <section id="output" className="section-padding bg-[#0f0f0f]">
+    <section id="output" className="grain-panel section-padding bg-[#0f0f0f]">
       <div className="max-grid space-y-8">
         <SectionHeader
           label="Output"

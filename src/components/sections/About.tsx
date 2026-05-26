@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export function AboutSection() {
   return (
-    <section id="about" className="section-padding bg-[#121212]">
+    <section id="about" className="section-padding bg-[#121212] grain-panel">
       <div className="max-grid">
         <div className="grid md:grid-cols-[1fr_3fr] gap-8 md:gap-12 items-start border border-[rgba(216,207,196,0.12)] bg-[rgba(255,255,255,0.02)] p-7 md:p-9">
           <div className="flex flex-col gap-4">
