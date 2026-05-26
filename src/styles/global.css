@@ -254,4 +254,86 @@
     background: repeating-linear-gradient(to right, transparent 0, transparent 88px, rgba(216, 207, 196, 0.08) 88px, rgba(216, 207, 196, 0.08) 89px);
     opacity: 0.12;
   }
+
+  .dissolve-defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  /* Cursor-driven dissolve. A single localized feDisplacementMap (#dissolve-remix)
+     scrambles the real SourceGraphic pixels in place within the cursor radius;
+     the smoothed cursor follow makes pixels visually reassemble as the cursor
+     moves on. The DissolveLayer island writes the cursor position to the
+     filter's feImage each frame. Until JS mounts, the image is parked
+     offscreen and the page renders untouched. */
+  .dissolve-host {
+    filter: url(#dissolve-remix);
+    /* Promote to its own compositor surface so per-frame filter updates don't
+       trigger full-tree repaints. */
+    will-change: filter;
+  }
+
+  /* Custom cursor dot. Lives at the top of the stacking order, follows the raw
+     pointer (no smoothing), and is positioned via translate3d set in JS so
+     updates skip layout/paint. top/left are fixed at 0 so the transform is the
+     only position source.
+
+     mix-blend-mode: difference makes the dot render as the per-channel inverse
+     of whatever's directly behind it — pure-white source over dark bg becomes
+     near-white, over the warm-neutral hero becomes a dark slate, over the
+     accent colors becomes their complement. High contrast on every surface
+     automatically, no JS sampling needed. */
+  .dissolve-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 100;
+    background: #ffffff;
+    border-radius: 9999px;
+    will-change: transform;
+    transition: opacity 120ms ease;
+    mix-blend-mode: exclusion;
+  }
+
+  /* Native cursor is hidden only when DissolveLayer successfully mounts and
+     adds this class to <html>. We use a 32×32 *transparent* SVG cursor as the
+     primary value; browsers reliably accept that dimension (some reject 1×1
+     and silently fall back to the OS cursor). `none` is the fallback for the
+     rare browser that can't parse the inline SVG. The :hover/:focus/:active
+     variants are included because UA stylesheets sometimes attach cursor rules
+     to those pseudo-states that would otherwise win on specificity. */
+  html.dissolve-active,
+  html.dissolve-active body,
+  html.dissolve-active *,
+  html.dissolve-active *:hover,
+  html.dissolve-active *:focus,
+  html.dissolve-active *:focus-visible,
+  html.dissolve-active *:active {
+    cursor: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2732%27%20height%3D%2732%27%3E%3C%2Fsvg%3E") 16 16, none !important;
+  }
+
+  @media (prefers-reduced-motion: reduce), (pointer: coarse), (hover: none) {
+    .dissolve-host {
+      filter: none;
+      will-change: auto;
+    }
+    .dissolve-dot {
+      display: none;
+    }
+    html.dissolve-active,
+    html.dissolve-active body,
+    html.dissolve-active * {
+      cursor: auto !important;
+    }
+    html.dissolve-active a,
+    html.dissolve-active button,
+    html.dissolve-active [role="button"] {
+      cursor: pointer !important;
+    }
+  }
 }
+

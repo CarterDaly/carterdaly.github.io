@@ -10,11 +10,16 @@ import { ContactSection } from "../components/sections/Contact";
 
 <BaseLayout>
   <Header />
-  <main>
-    <Hero client:load />
-    <OutputSection client:visible />
-    <AboutSection client:visible />
-    <ContactSection client:visible />
-  </main>
-  <Footer />
+  <!-- dissolve-host applies the cursor displacement filter; it sits *below*
+       the sticky Header so the header's position: sticky isn't broken by the
+       CSS filter creating a containing block. -->
+  <div class="dissolve-host">
+    <main>
+      <Hero client:load />
+      <OutputSection client:visible />
+      <AboutSection client:visible />
+      <ContactSection client:visible />
+    </main>
+    <Footer />
+  </div>
 </BaseLayout>
