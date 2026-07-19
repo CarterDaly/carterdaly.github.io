@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { Hero } from "../components/sections/Hero";
+import { HeroField } from "../components/sections/HeroField";
 import { OutputSection } from "../components/sections/Output";
 import { AboutSection } from "../components/sections/About";
 import { ContactSection } from "../components/sections/Contact";
@@ -15,7 +15,7 @@ import { ContactSection } from "../components/sections/Contact";
        CSS filter creating a containing block. -->
   <div class="dissolve-host">
     <main>
-      <Hero client:load />
+      <HeroField client:load />
       <OutputSection client:visible />
       <AboutSection client:visible />
       <ContactSection client:visible />
