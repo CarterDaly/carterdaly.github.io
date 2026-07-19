@@ -19,5 +19,8 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "baseline-browser-mapping": "^2.10.43"
   }
 }
