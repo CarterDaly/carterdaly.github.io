@@ -204,9 +204,9 @@ export function HeroField() {
           // grain-panel's default soft-light blend goes invisible on a
           // near-black base; screen keeps the bright speckles carrying at
           // roughly the About section's subtlety.
-          "--grain-opacity": 0.18,
+          "--grain-opacity": 0.12,
           "--grain-blend": "screen",
-          "--grain-filter": "brightness(0.7)",
+          "--grain-filter": "brightness(0.5)",
         } as React.CSSProperties
       }
     >
