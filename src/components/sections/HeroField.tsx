@@ -197,16 +197,21 @@ export function HeroField() {
     <section
       ref={sectionRef}
       id="top"
-      className="grain-panel relative min-h-[100vh] flex flex-col overflow-hidden cursor-default"
+      // Fill exactly the space below the sticky in-flow <Header/> so header +
+      // hero equal one viewport. Header height is set by its py-3 md:py-3.5
+      // padding: 43px below the md breakpoint, 47px at/above it — the calc
+      // subtractions track those at the same breakpoint. Keep in sync with
+      // Header.astro if its padding changes.
+      className="grain-panel relative min-h-[calc(100svh-43px)] md:min-h-[calc(100svh-47px)] flex flex-col overflow-hidden cursor-default"
       style={
         {
           background: BG,
           // grain-panel's default soft-light blend goes invisible on a
           // near-black base; screen keeps the bright speckles carrying at
           // roughly the About section's subtlety.
-          "--grain-opacity": 0.12,
+          "--grain-opacity": 0.15,
           "--grain-blend": "screen",
-          "--grain-filter": "brightness(0.5)",
+          "--grain-filter": "brightness(0.35)",
         } as React.CSSProperties
       }
     >
