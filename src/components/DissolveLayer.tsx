@@ -10,16 +10,41 @@ import { useEffect, useRef } from "react";
  *     dot rides the raw pointer 1:1, so hit-testing (clicks, hovers) lands
  *     exactly where the dot appears.
  *
- *   - The dissolve filter (#dissolve-remix) reads a *smoothed* pointer
- *     position, written once per RAF tick. The lag is what produces the
- *     trail/reassembly feeling — areas behind a moving cursor briefly
- *     stay scrambled before the smoothed point catches up.
+ *   - The dissolve filter reads a *smoothed* pointer position, written once
+ *     per RAF tick. The lag is what produces the trail/reassembly feeling.
+ *
+ * Two lens-targeting modes, chosen by what the page marks up:
+ *
+ *   - Single host (.dissolve-host): the element's whole subtree is one
+ *     filtered surface. The landing page uses this so the effect covers
+ *     everything.
+ *
+ *   - Per-element targets (.dissolve-target): each marked element gets its
+ *     OWN cloned filter instance, driven by the same cursor. A CSS filter
+ *     always includes an element's entire subtree, so cloning per element is
+ *     the only way to dissolve several separate big-type elements while the
+ *     small reading text between them stays outside any filter. Project pages
+ *     use this. Each target's filter is switched on only while the cursor is
+ *     near it, so many targets don't all run the filter every frame.
  *
  * Reduced-motion / touch / no-hover users skip the whole island.
  */
 
 const CURSOR_DOT_RADIUS = 5.5; // Tuned to visually match the feImage circle in the SVG filter
 const CURSOR_DOT_DIAMETER = CURSOR_DOT_RADIUS * 2;
+
+// How close (px) the smoothed cursor must get to a target's box before its
+// filter is switched on. Covers the feImage disc radius plus the maximum
+// displacement, so the lens is never clipped as it enters the element.
+const TARGET_ACTIVATE_MARGIN = 80;
+
+type LensUnit = {
+  el: HTMLElement;
+  feImage: Element;
+  filterId: string;
+  isHost: boolean;
+  active: boolean;
+};
 
 export default function DissolveLayer() {
   const dotRef = useRef<HTMLDivElement | null>(null);
@@ -33,9 +58,12 @@ export default function DissolveLayer() {
     if (reducedMotion || coarsePointer || noHover) return;
 
     const remixImg = document.getElementById("remix-cursor-img");
-    const dissolveHost = document.querySelector<HTMLElement>(".dissolve-host");
     const dot = dotRef.current;
-    if (!remixImg || !dissolveHost || !dot) return;
+    const host = document.querySelector<HTMLElement>(".dissolve-host");
+    const targetEls = Array.from(document.querySelectorAll<HTMLElement>(".dissolve-target"));
+    // Needs the shared filter template, the dot, and at least one thing to
+    // dissolve (a whole-page host or per-element targets).
+    if (!remixImg || !dot || (!host && targetEls.length === 0)) return;
 
     // Inline cursor value. Uses a 32×32 transparent SVG as the primary cursor
     // (browsers accept it cross-browser; `cursor: none` alone can be momentarily
@@ -61,28 +89,35 @@ export default function DissolveLayer() {
     const remixHalfW = parseFloat(remixImg.getAttribute("width") || "0") / 2;
     const remixHalfH = parseFloat(remixImg.getAttribute("height") || "0") / 2;
 
-    // The filter's user space is .dissolve-host's local box (origin at its
-    // top-left). Since the host sits below the sticky header, we have to
-    // subtract its document offset from the cursor position before writing
-    // the feImage x/y — otherwise the lens lands `headerHeight` px below
-    // where it should. Recomputed on resize; scroll doesn't shift the host's
-    // document position so doesn't need to refresh this.
-    let hostDocLeft = 0;
-    let hostDocTop = 0;
-    const updateHostOffset = () => {
-      const rect = dissolveHost.getBoundingClientRect();
-      hostDocLeft = rect.left + window.scrollX;
-      hostDocTop = rect.top + window.scrollY;
-    };
-    updateHostOffset();
+    // Build the lens units. The host (if present) reuses the shared template
+    // filter and its feImage. Each target gets a private deep clone of the
+    // filter with a unique feImage id so its lens position is independent.
+    const units: LensUnit[] = [];
+    if (host) {
+      units.push({ el: host, feImage: remixImg, filterId: "dissolve-remix", isHost: true, active: true });
+    }
+    const filterTemplate = remixImg.closest("filter");
+    const defs = filterTemplate?.parentNode ?? null;
+    if (filterTemplate && defs) {
+      targetEls.forEach((el, i) => {
+        const filterId = `dissolve-remix-t${i}`;
+        const clone = filterTemplate.cloneNode(true) as Element;
+        clone.setAttribute("id", filterId);
+        const feImgNode = clone.querySelector("feImage");
+        if (!feImgNode) return;
+        feImgNode.setAttribute("id", `remix-cursor-img-t${i}`);
+        feImgNode.setAttribute("x", "-9999");
+        feImgNode.setAttribute("y", "-9999");
+        defs.appendChild(clone);
+        units.push({ el, feImage: feImgNode, filterId, isHost: false, active: false });
+      });
+    }
 
     let targetX = -9999;
     let targetY = -9999;
     let smoothX = -9999;
     let smoothY = -9999;
     let firstMove = true;
-    let scrollX = window.scrollX;
-    let scrollY = window.scrollY;
 
     const moveDot = (x: number, y: number) => {
       // translate3d forces the dot onto its own compositor layer so updates
@@ -123,7 +158,7 @@ export default function DissolveLayer() {
       });
     };
 
-const trackPointer = (e: PointerEvent) => {
+    const trackPointer = (e: PointerEvent) => {
       targetX = e.clientX;
       targetY = e.clientY;
       if (firstMove) {
@@ -153,8 +188,7 @@ const trackPointer = (e: PointerEvent) => {
     // blur = window lost focus (URL bar, tab switch, devtools, etc.). The
     // cursor may *still* be inside the viewport rectangle, so we don't reset
     // target — we just hide the dot. On focus return we re-show it at the
-    // preserved position, closing the window during which the OS cursor would
-    // otherwise be the only visual at the pointer's location.
+    // preserved position.
     const onWindowBlur = () => {
       dot.style.opacity = "0";
     };
@@ -166,11 +200,6 @@ const trackPointer = (e: PointerEvent) => {
         moveDot(targetX, targetY);
         dot.style.opacity = "1";
       }
-    };
-
-    const onScroll = () => {
-      scrollX = window.scrollX;
-      scrollY = window.scrollY;
     };
 
     const onVisibilityChange = () => {
@@ -187,9 +216,8 @@ const trackPointer = (e: PointerEvent) => {
     // Track whether the pointer is currently inside .dissolve-host. The
     // boundary between the unfiltered header and the filtered dissolve-host
     // is the spot where the cursor reappears (different stacking contexts,
-    // browser defers the cursor recompute). We only kick on the actual
-    // boundary cross — usually twice per header trip — so the reflow is
-    // invisible instead of running on every element transition.
+    // browser defers the cursor recompute). Only relevant in host mode; the
+    // per-target pages have no such large filtered region to cross.
     let wasInHost = false;
 
     const onPointerOver = (e: PointerEvent) => {
@@ -197,10 +225,12 @@ const trackPointer = (e: PointerEvent) => {
       if (el && el.style) {
         el.style.setProperty("cursor", TRANSPARENT_CURSOR, "important");
       }
-      const inHost = el instanceof Node && dissolveHost.contains(el);
-      if (inHost !== wasInHost) {
-        wasInHost = inHost;
-        kickCursor();
+      if (host) {
+        const inHost = el instanceof Node && host.contains(el);
+        if (inHost !== wasInHost) {
+          wasInHost = inHost;
+          kickCursor();
+        }
       }
     };
 
@@ -210,27 +240,34 @@ const trackPointer = (e: PointerEvent) => {
     window.addEventListener("pointerover", onPointerOver, { passive: true });
     window.addEventListener("focus", onWindowFocus);
     window.addEventListener("blur", onWindowBlur);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", updateHostOffset);
     document.addEventListener("visibilitychange", onVisibilityChange);
 
-    // Catch layout shifts (font load, lazy-mounted islands) that move the
-    // host's document top after initial measurement.
-    const hostObserver =
-      typeof ResizeObserver !== "undefined" ? new ResizeObserver(updateHostOffset) : null;
-    hostObserver?.observe(dissolveHost);
-
-let raf = 0;
+    let raf = 0;
+    const damp = 0.22;
     const tick = () => {
-      const damp = 0.22;
       smoothX += (targetX - smoothX) * damp;
       smoothY += (targetY - smoothY) * damp;
 
-      // Cursor → host-local coords: (clientXY + scroll) − host's document offset
-      const localX = smoothX + scrollX - hostDocLeft;
-      const localY = smoothY + scrollY - hostDocTop;
-      remixImg.setAttribute("x", (localX - remixHalfW).toFixed(1));
-      remixImg.setAttribute("y", (localY - remixHalfH).toFixed(1));
+      // Rects are read live each frame (in viewport space, same as the
+      // cursor), so scrolling and layout shifts — e.g. the models accordion
+      // opening — keep every lens aligned without extra bookkeeping.
+      for (const u of units) {
+        const rect = u.el.getBoundingClientRect();
+        if (!u.isHost) {
+          const near =
+            smoothX >= rect.left - TARGET_ACTIVATE_MARGIN &&
+            smoothX <= rect.right + TARGET_ACTIVATE_MARGIN &&
+            smoothY >= rect.top - TARGET_ACTIVATE_MARGIN &&
+            smoothY <= rect.bottom + TARGET_ACTIVATE_MARGIN;
+          if (near !== u.active) {
+            u.active = near;
+            u.el.style.setProperty("filter", near ? `url(#${u.filterId})` : "none");
+          }
+          if (!near) continue;
+        }
+        u.feImage.setAttribute("x", (smoothX - rect.left - remixHalfW).toFixed(1));
+        u.feImage.setAttribute("y", (smoothY - rect.top - remixHalfH).toFixed(1));
+      }
 
       raf = requestAnimationFrame(tick);
     };
@@ -244,10 +281,13 @@ let raf = 0;
       window.removeEventListener("pointerover", onPointerOver);
       window.removeEventListener("focus", onWindowFocus);
       window.removeEventListener("blur", onWindowBlur);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", updateHostOffset);
       document.removeEventListener("visibilitychange", onVisibilityChange);
-      hostObserver?.disconnect();
+      // Tear down per-target filters and their inline styles.
+      for (const u of units) {
+        if (u.isHost) continue;
+        u.el.style.removeProperty("filter");
+        document.getElementById(u.filterId)?.remove();
+      }
       document.documentElement.classList.remove("dissolve-active");
       document.documentElement.style.removeProperty("cursor");
       document.body.style.removeProperty("cursor");

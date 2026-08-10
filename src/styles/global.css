@@ -92,6 +92,18 @@
   }
 
   html {
+    /* Viewport-proportional scaling. The whole design is authored in rem
+       (Tailwind's spacing/type scale is rem-based), so scaling the root
+       font-size zooms spacing, the max-width container, and type together as
+       the viewport changes — no marooned content on wide monitors, no
+       breakpoint jumps. Technique mirrors isabelmoranta.com (root font-size
+       tracks the viewport; everything in rem).
+
+       ONE tuning knob: `1.05vw` sets overall size (≈16px at ~1520px wide, so a
+       MacBook sees today's proportions), the 15px floor protects small
+       laptops/phones, the 26px ceiling stops absurd type on 4K. Tailwind's
+       breakpoints are rem-against-initial-16px, so they do NOT move with this. */
+    font-size: clamp(15px, 0.9vw, 26px);
     scroll-behavior: smooth;
     background: var(--color-bg);
     color: var(--color-text);
@@ -118,7 +130,7 @@
   }
 
   p {
-    font-size: 15px;
+    font-size: 0.9375rem; /* 15px at the 16px baseline; scales with the root */
     color: var(--color-muted);
   }
 
@@ -170,7 +182,7 @@
   }
 
   .eyebrow {
-    @apply text-[11px] uppercase tracking-[0.28em] text-[var(--accent-tertiary)] font-medium;
+    @apply text-[0.6875rem] uppercase tracking-[0.28em] text-[var(--accent-tertiary)] font-medium;
   }
 
   .underline-link {

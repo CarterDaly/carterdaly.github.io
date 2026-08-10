@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { CaseStudyScaffold } from "../../components/work/CaseStudyScaffold";
+
+/*
+  /work/fusion — Fusion modeling case study. SCAFFOLD ONLY (not yet populated).
+
+  Card: "Fusion modeling" in src/components/sections/Output.tsx (position 01).
+  Current blurb: "Data-driven plasma insights and uncertainty-aware modeling for
+  complex, noisy systems."
+
+  Full build guide (responsive/rem rules + how to stay consistent-not-a-copy with
+  the NixTLA pane) lives in src/components/work/CaseStudyScaffold.tsx.
+
+  SUGGESTED SECTIONS — make them fit FUSION; do NOT reuse NixTLA's section list:
+    01 The problem   — what makes plasma/fusion data hard: noise, sparsity,
+                       diagnostic limits, physics constraints, cost of each shot.
+    02 Approach      — the modeling method(s) and WHY (uncertainty-aware /
+                       physics-informed / surrogate / Bayesian…). Mono accent for
+                       method + library names, editorial voice for the argument.
+    03 Validation    — how accuracy AND uncertainty were judged honestly (not
+                       just a single metric); what the model does when unsure.
+    04 Artifacts     — whatever is REAL: repo, paper, figure, notebook. If a live
+                       demo exists, use the LIVE_APP_URL/SOURCE_URL CTA pattern.
+  When populated, replace <CaseStudyScaffold/> with a dedicated FusionCaseStudy
+  component, and add `href: "/work/fusion"` to the card in Output.tsx.
+
+  NOTE: the headline/standfirst below are PLACEHOLDER copy — rewrite from the
+  real project (no em dashes, Swiss restraint).
+*/
+---
+
+<BaseLayout
+  title="Fusion modeling, Carter Daly"
+  description="Data-driven plasma insights and uncertainty-aware modeling for complex, noisy systems."
+>
+  <Header />
+  <!-- No .dissolve-host wrapper: project pages scope the dissolve to
+       .dissolve-target elements inside the component (see the scaffold). -->
+  <div>
+    <main>
+      <CaseStudyScaffold
+        client:load
+        index="01"
+        eyebrow="Fusion modeling"
+        title="Modeling plasma, under uncertainty."
+        standfirst="Placeholder value proposition. Write the real one-sentence thesis here once the project is documented."
+      />
+    </main>
+    <Footer />
+  </div>
+</BaseLayout>

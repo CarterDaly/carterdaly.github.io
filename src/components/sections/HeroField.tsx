@@ -197,16 +197,22 @@ export function HeroField() {
     <section
       ref={sectionRef}
       id="top"
-      className="grain-panel relative min-h-[100vh] flex flex-col overflow-hidden cursor-default"
+      // Fill exactly the space below the sticky in-flow <Header/> so header +
+      // hero equal one viewport. The header is built from rem padding
+      // (py-3 md:py-3.5) + rem type, so its height scales with the root
+      // font-size; expressing the offset in rem (≈43px / 47px at the 16px
+      // baseline) keeps header + hero == one viewport at every scale. Keep in
+      // sync with Header.astro if its padding changes.
+      className="grain-panel relative min-h-[calc(100svh-2.6875rem)] md:min-h-[calc(100svh-2.9375rem)] flex flex-col overflow-hidden cursor-default"
       style={
         {
           background: BG,
           // grain-panel's default soft-light blend goes invisible on a
           // near-black base; screen keeps the bright speckles carrying at
           // roughly the About section's subtlety.
-          "--grain-opacity": 0.12,
+          "--grain-opacity": 0.15,
           "--grain-blend": "screen",
-          "--grain-filter": "brightness(0.5)",
+          "--grain-filter": "brightness(0.35)",
         } as React.CSSProperties
       }
     >
@@ -240,7 +246,7 @@ export function HeroField() {
         </h1>
 
         <motion.p
-          className="mt-9 text-[15px] leading-[1.78] max-w-[380px]"
+          className="mt-9 text-[0.9375rem] leading-[1.78] max-w-[23.75rem]"
           style={{ color: "var(--color-muted)" }}
           initial={rm ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}

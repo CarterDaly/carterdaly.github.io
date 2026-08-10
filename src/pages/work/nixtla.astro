@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { NixtlaCaseStudy } from "../../components/work/NixtlaCaseStudy";
+---
+
+<BaseLayout
+  title="NixTLA Forecast Studio, Carter Daly"
+  description="A no-code interface to Nixtla's forecasting stack: benchmark statistical, machine-learning, and neural time-series models through one UI."
+>
+  <Header />
+  <!-- No page-wide dissolve-host here: on project pages the cursor-dissolve
+       filter is scoped to the headline inside NixtlaCaseStudy so the smaller
+       reading text stays outside the lens. -->
+  <div>
+    <main>
+      <NixtlaCaseStudy client:load />
+    </main>
+    <Footer />
+  </div>
+</BaseLayout>
