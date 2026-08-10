@@ -3,6 +3,14 @@ import { motion } from "framer-motion";
 import clsx from "clsx";
 import { SectionHeader } from "../primitives/SectionHeader";
 
+// A card becomes a link only when it has an `href`. Scaffold routes already
+// exist for all three projects:
+//   Fusion modeling        → /work/fusion         (scaffold, not populated)
+//   Race strategy & FastF1 → /work/race-strategy  (scaffold, not populated)
+//   Forecasting systems    → /work/nixtla         (live)
+// The first two are intentionally left non-clickable so unfinished pages aren't
+// shown to visitors. To activate one, add its `href` below once its page is real
+// (build guide: src/components/work/CaseStudyScaffold.tsx).
 const domains: {
   title: string;
   description: string;
@@ -11,10 +19,12 @@ const domains: {
   {
     title: "Fusion modeling",
     description: "Data-driven plasma insights and uncertainty-aware modeling for complex, noisy systems.",
+    // href: "/work/fusion",  // ← uncomment when the page is populated
   },
   {
     title: "Race strategy & FastF1",
     description: "Real-time, time-series tactics grounded in interpretable signals and pace modelling.",
+    // href: "/work/race-strategy",  // ← uncomment when the page is populated
   },
   {
     title: "Forecasting systems",
@@ -60,7 +70,7 @@ export function OutputSection() {
                 viewport={{ once: true, margin: "-80px" }}
                 custom={idx}
               >
-                <div className="flex items-center gap-3 text-[12px] uppercase tracking-[0.24em] text-[var(--accent-tertiary)]">
+                <div className="flex items-center gap-3 text-[0.75rem] uppercase tracking-[0.24em] text-[var(--accent-tertiary)]">
                   <span className="text-[var(--accent-secondary)]">0{idx + 1}</span>
                   <span className="h-px flex-1 bg-[rgba(216,207,196,0.25)]" />
                   {domain.href ? (
@@ -75,7 +85,7 @@ export function OutputSection() {
                 <h3 className="text-xl font-semibold text-[var(--color-text)] leading-tight">{domain.title}</h3>
                 <p className="text-[var(--color-muted)] leading-relaxed text-base">{domain.description}</p>
                 {domain.href ? (
-                  <span className="mt-1 text-[11px] uppercase tracking-[0.2em] text-[var(--accent-tertiary)] opacity-0 -translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0" style={{ fontFamily: "var(--font-mono)" }}>
+                  <span className="mt-1 text-[0.6875rem] uppercase tracking-[0.2em] text-[var(--accent-tertiary)] opacity-0 -translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0" style={{ fontFamily: "var(--font-mono)" }}>
                     View project
                   </span>
                 ) : null}

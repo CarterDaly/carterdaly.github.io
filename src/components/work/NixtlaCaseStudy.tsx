@@ -70,13 +70,13 @@ function Marker({ index, children }: { index: string; children: React.ReactNode 
   return (
     <div className="flex items-baseline gap-5 mb-12">
       <span
-        className="text-[12px]"
+        className="text-[0.75rem]"
         style={{ fontFamily: "var(--font-display)", color: "var(--accent-secondary)", fontWeight: 500 }}
       >
         {index}
       </span>
       <span
-        className="text-[12px] uppercase tracking-[0.26em]"
+        className="text-[0.75rem] uppercase tracking-[0.26em]"
         style={{ fontFamily: "var(--font-display)", color: "var(--accent-tertiary)", fontWeight: 500 }}
       >
         {children}
@@ -107,7 +107,7 @@ function TextLink({ href, children, external }: { href: string; children: React.
     <a
       href={href}
       {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
-      className="group relative inline-block text-[12px] uppercase tracking-[0.18em]"
+      className="group relative inline-block text-[0.75rem] uppercase tracking-[0.18em]"
       style={{ fontFamily: "var(--font-display)", color: "var(--color-text)", fontWeight: 500 }}
     >
       {children}
@@ -165,7 +165,7 @@ export function NixtlaCaseStudy() {
         <header className="grid lg:grid-cols-12 gap-x-10 gap-y-14">
           <div className="lg:col-span-8">
             <motion.p
-              className="text-[12px] uppercase tracking-[0.28em] mb-9"
+              className="text-[0.75rem] uppercase tracking-[0.28em] mb-9"
               style={{ fontFamily: "var(--font-display)", color: "var(--accent-tertiary)", fontWeight: 500 }}
               initial={rm ? false : { opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -198,7 +198,7 @@ export function NixtlaCaseStudy() {
 
             {/* Standfirst */}
             <motion.p
-              className="mt-10 text-[19px] md:text-[21px] leading-[1.55] max-w-[40ch]"
+              className="mt-10 text-[1.1875rem] md:text-[1.3125rem] leading-[1.55] max-w-[40ch]"
               style={{ color: "var(--color-text)" }}
               initial={rm ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
@@ -221,13 +221,13 @@ export function NixtlaCaseStudy() {
               {CREDITS.map((row) => (
                 <div key={row.k} className="py-4 border-b" style={{ borderColor: "rgba(216,207,196,0.1)" }}>
                   <dt
-                    className="text-[10px] uppercase tracking-[0.24em] mb-1.5"
+                    className="text-[0.625rem] uppercase tracking-[0.24em] mb-1.5"
                     style={{ fontFamily: "var(--font-display)", color: "var(--accent-tertiary)", fontWeight: 500 }}
                   >
                     {row.k}
                   </dt>
                   <dd
-                    className="text-[13px] leading-[1.5]"
+                    className="text-[0.8125rem] leading-[1.5]"
                     style={row.mono
                       ? { fontFamily: "var(--font-mono)", color: "var(--color-muted)" }
                       : { color: "var(--color-text)" }}
@@ -244,7 +244,7 @@ export function NixtlaCaseStudy() {
                   href={LIVE_APP_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-[12px] uppercase tracking-[0.18em] transition-colors duration-200 hover:bg-transparent"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-[0.75rem] uppercase tracking-[0.18em] transition-colors duration-200 hover:bg-transparent"
                   style={{ fontFamily: "var(--font-display)", fontWeight: 500, background: "var(--accent-primary)", color: "var(--color-text)", border: "1px solid var(--accent-primary)" }}
                 >
                   Launch the app ↗
@@ -252,7 +252,7 @@ export function NixtlaCaseStudy() {
               ) : (
                 <a
                   href="#app-demo"
-                  className="inline-flex items-center gap-2.5 px-6 py-3.5 text-[12px] uppercase tracking-[0.18em] border whitespace-nowrap transition-colors duration-200 hover:bg-[rgba(14,59,46,0.18)]"
+                  className="inline-flex items-center gap-2.5 px-6 py-3.5 text-[0.75rem] uppercase tracking-[0.18em] border whitespace-nowrap transition-colors duration-200 hover:bg-[rgba(14,59,46,0.18)]"
                   style={{ fontFamily: "var(--font-display)", color: "var(--color-text)", fontWeight: 500, borderColor: "var(--accent-primary)" }}
                 >
                   <span className="w-1.5 h-1.5 rounded-full" style={{ background: "var(--accent-primary)" }} />
@@ -288,7 +288,7 @@ export function NixtlaCaseStudy() {
               </p>
             </Reveal>
             <Reveal delay={0.08} className="lg:col-span-4 lg:pt-2">
-              <p className="text-[16px] leading-[1.75]" style={{ color: "var(--color-muted)" }}>
+              <p className="text-[1rem] leading-[1.75]" style={{ color: "var(--color-muted)" }}>
                 Every forecast means hand-wiring data frames, model configs, and
                 cross-validation windows across three separate libraries. Forecast
                 Studio does that wiring, and turns it into a handful of controls.
@@ -330,7 +330,7 @@ export function NixtlaCaseStudy() {
                     className="group w-full flex items-baseline gap-5 md:gap-8 py-7 md:py-9 text-left"
                   >
                     <span
-                      className="text-[13px] w-7 shrink-0 transition-colors duration-300"
+                      className="text-[0.8125rem] w-7 shrink-0 transition-colors duration-300"
                       style={{ fontFamily: "var(--font-display)", color: on ? "var(--accent-secondary)" : "var(--color-muted)", fontWeight: 500 }}
                     >
                       0{i + 1}
@@ -349,13 +349,13 @@ export function NixtlaCaseStudy() {
                       {f.name}
                     </span>
                     <span
-                      className="hidden sm:block text-[11px] tracking-[0.02em] self-center transition-colors duration-300"
+                      className="hidden sm:block text-[0.6875rem] tracking-[0.02em] self-center transition-colors duration-300"
                       style={{ fontFamily: "var(--font-mono)", color: on ? "var(--accent-tertiary)" : "var(--color-muted)" }}
                     >
                       {f.lib}
                     </span>
                     <span
-                      className="text-[17px] shrink-0 self-center transition-transform duration-300"
+                      className="text-[1.0625rem] shrink-0 self-center transition-transform duration-300"
                       style={{ color: on ? "var(--accent-tertiary)" : "var(--color-muted)", transform: on ? "rotate(45deg)" : "none" }}
                       aria-hidden="true"
                     >
@@ -374,11 +374,11 @@ export function NixtlaCaseStudy() {
                         className="overflow-hidden"
                       >
                         <div className="grid md:grid-cols-12 gap-y-4 md:gap-x-8 pb-10 md:pl-[calc(1.75rem+2rem)]">
-                          <p className="md:col-span-7 text-[17px] leading-[1.65]" style={{ color: "var(--color-text)" }}>
+                          <p className="md:col-span-7 text-[1.0625rem] leading-[1.65]" style={{ color: "var(--color-text)" }}>
                             {f.blurb}
                           </p>
                           <p
-                            className="md:col-span-5 text-[12px] leading-[1.7] self-start md:text-right"
+                            className="md:col-span-5 text-[0.75rem] leading-[1.7] self-start md:text-right"
                             style={{ fontFamily: "var(--font-mono)", color: "var(--color-muted)" }}
                           >
                             {f.models}
@@ -403,15 +403,15 @@ export function NixtlaCaseStudy() {
               <Reveal key={step.n} delay={i * 0.08}>
                 <div className="pt-5 border-t" style={{ borderColor: "rgba(216,207,196,0.22)" }}>
                   <span
-                    className="dissolve-target block text-[34px] leading-none mb-5"
+                    className="dissolve-target block text-[2.125rem] leading-none mb-5"
                     style={{ fontFamily: "var(--font-display)", color: "var(--color-text)", fontWeight: 500, letterSpacing: "-0.03em" }}
                   >
                     {step.n}
                   </span>
-                  <h3 className="mb-3 text-[16px] uppercase tracking-[0.08em]" style={{ fontFamily: "var(--font-display)", color: "var(--color-text)", fontWeight: 600 }}>
+                  <h3 className="mb-3 text-[1rem] uppercase tracking-[0.08em]" style={{ fontFamily: "var(--font-display)", color: "var(--color-text)", fontWeight: 600 }}>
                     {step.title}
                   </h3>
-                  <p className="text-[14px] leading-[1.7]" style={{ color: "var(--color-muted)" }}>
+                  <p className="text-[0.875rem] leading-[1.7]" style={{ color: "var(--color-muted)" }}>
                     {step.body}
                   </p>
                 </div>
@@ -427,7 +427,7 @@ export function NixtlaCaseStudy() {
           <Marker index="04">How it is built</Marker>
           <div className="grid lg:grid-cols-12 gap-x-10">
             <Reveal className="lg:col-span-4 mb-8 lg:mb-0">
-              <p className="text-[15px] leading-[1.8]" style={{ color: "var(--color-muted)" }}>
+              <p className="text-[0.9375rem] leading-[1.8]" style={{ color: "var(--color-muted)" }}>
                 One request travels through four stages, front to back.
               </p>
             </Reveal>
@@ -436,12 +436,12 @@ export function NixtlaCaseStudy() {
                 <Reveal key={node.t} delay={i * 0.07}>
                   <div className="grid sm:grid-cols-[1fr_2fr] gap-1 sm:gap-8 py-5 border-b items-baseline" style={{ borderColor: "rgba(216,207,196,0.16)" }}>
                     <span
-                      className="text-[19px]"
+                      className="text-[1.1875rem]"
                       style={{ fontFamily: "var(--font-display)", color: "var(--color-text)", fontWeight: 500 }}
                     >
                       {node.t}
                     </span>
-                    <span className="text-[14px] leading-[1.6]" style={{ color: "var(--color-muted)" }}>
+                    <span className="text-[0.875rem] leading-[1.6]" style={{ color: "var(--color-muted)" }}>
                       {node.s}
                     </span>
                   </div>
@@ -472,7 +472,7 @@ export function NixtlaCaseStudy() {
                 aria-label="NixTLA Forecast Studio recorded walkthrough"
               />
               <figcaption className="mt-4 flex items-baseline justify-between">
-                <span className="text-[11px] uppercase tracking-[0.2em]" style={{ fontFamily: "var(--font-display)", color: "var(--color-muted)", fontWeight: 500 }}>
+                <span className="text-[0.6875rem] uppercase tracking-[0.2em]" style={{ fontFamily: "var(--font-display)", color: "var(--color-muted)", fontWeight: 500 }}>
                   Recorded walkthrough
                 </span>
                 <TextLink href={SOURCE_URL} external>Source ↗</TextLink>

@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { CaseStudyScaffold } from "../../components/work/CaseStudyScaffold";
+
+/*
+  /work/race-strategy — Race strategy & FastF1 case study. SCAFFOLD ONLY.
+
+  Card: "Race strategy & FastF1" in src/components/sections/Output.tsx (pos 02).
+  Current blurb: "Real-time, time-series tactics grounded in interpretable
+  signals and pace modelling."
+
+  Full build guide (responsive/rem rules + how to stay consistent-not-a-copy with
+  the NixTLA pane) lives in src/components/work/CaseStudyScaffold.tsx.
+
+  SUGGESTED SECTIONS — make them fit RACE STRATEGY; do NOT reuse NixTLA's list:
+    01 The problem   — strategy under uncertainty in real time: tyre deg, safety
+                       cars, undercut/overcut windows, pit-loss, degrading data.
+    02 The signals   — what FastF1 gives you and how it's turned into decisions
+                       (pace/stint modelling, interpretable features). Mono accent
+                       for FastF1 / data-source names.
+    03 The call      — how a recommendation is made and, crucially, made
+                       LEGIBLE (why this stop, this lap) — interpretability is
+                       the story, not a black box.
+    04 Artifacts     — repo / notebook / a race worked example / a chart. Use the
+                       LIVE_APP_URL/SOURCE_URL CTA pattern if there's a demo.
+  When populated, replace <CaseStudyScaffold/> with a dedicated
+  RaceStrategyCaseStudy component, and add `href: "/work/race-strategy"` to the
+  card in Output.tsx.
+
+  NOTE: the headline/standfirst below are PLACEHOLDER copy — rewrite from the
+  real project (no em dashes, Swiss restraint).
+*/
+---
+
+<BaseLayout
+  title="Race strategy & FastF1, Carter Daly"
+  description="Real-time, time-series race tactics grounded in interpretable signals and pace modelling."
+>
+  <Header />
+  <!-- No .dissolve-host wrapper: project pages scope the dissolve to
+       .dissolve-target elements inside the component (see the scaffold). -->
+  <div>
+    <main>
+      <CaseStudyScaffold
+        client:load
+        index="02"
+        eyebrow="Race strategy & FastF1"
+        title="Strategy calls, made legible."
+        standfirst="Placeholder value proposition. Write the real one-sentence thesis here once the project is documented."
+      />
+    </main>
+    <Footer />
+  </div>
+</BaseLayout>
